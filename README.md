@@ -1,5 +1,5 @@
 # HWBD3
-## Блок 1 (Flink checkpoint )
+## Блок 1 (Flink checkpoint)
 
 ### 1. Развернуть локально flink+kafka через docker-compose
 
@@ -30,11 +30,13 @@ docker-compose exec jobmanager ./bin/flink run -py /opt/pyflink/checkpoint_devic
 
 ### 4. Настроить Flink checkpoint и сохранять в hdfs, предварительно поднять hdfs в docker-compose
 
-`docker-compose build`
-`docker-compose up -d`
-`docker-compose exec kafka kafka-topics.sh --bootstrap-server kafka:9092 --create --topic itmo2023 --partitions 1 --replication-factor 1`
-`docker-compose exec kafka kafka-topics.sh --bootstrap-server kafka:9092 --create --topic itmo2023preprocessed --partitions 1 --replication-factor 1`
-`docker-compose exec jobmanager ./bin/flink run -py /opt/pyflink/checkpoint_hdfs_device_job.py -d`
+```
+docker-compose build 
+docker-compose up -d 
+docker-compose exec kafka kafka-topics.sh --bootstrap-server kafka:9092 --create --topic itmo2023 --partitions 1 --replication-factor 1
+docker-compose exec kafka kafka-topics.sh --bootstrap-server kafka:9092 --create --topic itmo2023preprocessed --partitions 1 --replication-factor 1
+docker-compose exec jobmanager ./bin/flink run -py /opt/pyflink/checkpoint_hdfs_device_job.py -d
+```
 
 Код джобы находится в checkpoint_hdfs_device_job.py. Flink не видит hdfs, не получилось выполнить задание.
 
