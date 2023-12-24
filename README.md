@@ -40,3 +40,6 @@ docker-compose exec jobmanager ./bin/flink run -py /opt/pyflink/checkpoint_hdfs_
 
 Код джобы находится в checkpoint_hdfs_device_job.py. Flink не видит hdfs, не получилось выполнить задание.
 
+![image](https://github.com/LadaNikitina/HWBD3/assets/23546579/96267192-a5bd-4530-b95d-c6c0e192a6d4)
+
+
