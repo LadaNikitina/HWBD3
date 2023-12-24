@@ -52,12 +52,11 @@ def python_data_stream_example():
 
     ds = env.from_source(source, WatermarkStrategy.no_watermarks(), "Kafka Source")
 
-    ds.window(
-        TumblingProcessingTimeWindows.of(Time.seconds(100))
-    ).reduce(MaxTemperatureFunctionReducer()) \
+    ds.window_all(TumblingProcessingTimeWindows.of(Time.seconds(10)))\
+        .reduce(MaxTemperatureFunctionReducer()) \
         .map(TemperatureFunction(), Types.STRING()) \
         .sink_to(sink)
-
+    # максимальная температура в каждом окне
     env.execute_async("Devices preprocessing")
 
 
@@ -69,7 +68,12 @@ class TemperatureFunction(MapFunction):
 
 class MaxTemperatureFunctionReducer(ReduceFunction):
 
-    def reduce():
+    def reduce(self, v1, v2):
+        if v1.temperature > v2.temperature:
+            return v1
+        else:
+            return v2
+
 
 
 if __name__ == '__main__':
