@@ -11,6 +11,15 @@
 
 ### 3. Настроить Flink checkpoint и сохранять в local dir `file:///opt/pyflink/tmp/checkpoints/logs`  для обеспечения recovery mechanism
 
+Запуск:
+
+docker-compose build
+docker-compose up -d
+docker-compose exec kafka kafka-topics.sh --bootstrap-server kafka:9092 --create --topic itmo2023 --partitions 1 --replication-factor 1
+docker-compose exec kafka kafka-topics.sh --bootstrap-server kafka:9092 --create --topic itmo2023preprocessed --partitions 1 --replication-factor 1
+docker-compose exec jobmanager ./bin/flink run -py /opt/pyflink/checkpoint_device_job.py -d  
+
+
 Код джобы находится в checkpoint_device_job.py
 
 ![image](https://github.com/LadaNikitina/HWBD3/assets/23546579/13021022-b01e-4d88-8b55-1cbb15149ec6)
@@ -19,4 +28,12 @@
 
 
 ### 4. Настроить Flink checkpoint и сохранять в hdfs, предварительно поднять hdfs в docker-compose
+
+docker-compose build
+docker-compose up -d
+docker-compose exec kafka kafka-topics.sh --bootstrap-server kafka:9092 --create --topic itmo2023 --partitions 1 --replication-factor 1
+docker-compose exec kafka kafka-topics.sh --bootstrap-server kafka:9092 --create --topic itmo2023preprocessed --partitions 1 --replication-factor 1
+docker-compose exec jobmanager ./bin/flink run -py /opt/pyflink/checkpoint_hdfs_device_job.py -d  
+
+Код джобы находится в checkpoint_hdfs_device_job.py. Flink не видит hdfs, не получилось выполнить задание.
 
