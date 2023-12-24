@@ -1,4 +1,7 @@
 # HWBD3
+
+Выполнено Ледневой Дарьей Романовной
+
 ## Блок 1 (Flink checkpoint)
 
 ### 1. Развернуть локально flink+kafka через docker-compose
